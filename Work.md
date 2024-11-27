@@ -1,0 +1,9 @@
+- Create a repository 
+- Initialize the repository
+- node_modules, package.json, package-lock.json
+- Install Express
+- Create server
+- Listen the server on PORT
+- Write request handlers for /test , /hello
+- Install nodemon and update scripts inside package.json
+- Difference between caret and tilde ( ^ vs ~ )
