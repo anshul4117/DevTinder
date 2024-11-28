@@ -7,3 +7,20 @@
 - Write request handlers for /test , /hello
 - Install nodemon and update scripts inside package.json
 - Difference between caret and tilde ( ^ vs ~ )
+
+- Initialize git
+- .gitignore
+- Create a repo on github
+- Push all code to remote origin
+- Play with routes and routes extensions ex. /test , /helo , /abc
+- Order of the routes matter a lot
+- Install postman app and make a workspace /collection > test API call
+- Explore the routing and use ?, +, (), * in the routes
+- Use of regex in routes /a/ , /.*fly$/
+- Reading the query params in the routes
+- Reading the dynamic routes    
+
+- Multiple Routes Handlers - Play with the code 
+- next()
+- next function and errors along with res.send()
+- app.use("/route",rh,[rh2,rh3],rh4,rh5);
