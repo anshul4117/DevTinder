@@ -1,37 +1,32 @@
 const express = require('express');
+const connectDB = require('./config/db.js');
+const User = require('./models/user.js');
 const app = express();
 
 
-app.use(
-    "/user",
-    (req,res,next)=>{
-        console.log("Handling the route user 1")
-        next();
-        res.send("Hello User");
-    },
-    (req,res,next)=>{
-        console.log("Handling the route user 2")
-        // res.send("2nd User");
-        next();
-    },
-    (req,res,next)=>{
-        console.log("Handling the route user 3")
-        // res.send("3nd User");
-        next()
-    },
-    (req,res,next)=>{
-        console.log("Handling the route user 4")
-        // res.send("4nd User");
-        next()
-    },
-    (req,res,next)=>{
-        console.log("Handling the route user 5")
-        // res.send("5nd User");
-        next()
-    },
-)
+app.post('/user', async (req, res) => {
+    const user = new User({
+        firstName: "PuranChand",
+        lastName: "Saini",
+        email: "Saini@gmail.com",
+        age: 52,
+        gender: "male"
+    });
 
+    await user.save()
+    res.status(201).json({
+        message: "User created successfully",
+    })
 
-app.listen(3000,()=>{
-    console.log('server is running on port 3000');
 })
+
+connectDB()
+    .then(() => {
+        console.log('Connected to database');
+        app.listen(3000, () => {
+            console.log('server is running on port 3000');
+        });
+    })
+    .catch((err) => {
+        console.error("Database is not connected!");
+    })

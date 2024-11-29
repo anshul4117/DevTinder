@@ -24,3 +24,14 @@
 - next()
 - next function and errors along with res.send()
 - app.use("/route",rh,[rh2,rh3],rh4,rh5);
+- * What is Middleware 
+- * How express Js basically handles the request behind the scenes
+- * Difference between app.use() and app.all()
+- Write a dummy auth middleware for admin
+- Write a dummy auth middleware for all user routes , except /user/login
+
+- Create free cluster on MongoDB website
+- Install mongoose library
+- Connect your application to the Database "Connection-url"/devTinder
+- Call the connection function and connect to the DB before starting applicaion on PORT
+- 
