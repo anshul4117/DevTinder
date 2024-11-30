@@ -13,10 +13,9 @@ const adminAuth = (req, res, next) => {
 }
 const userAuth = async (req, res, next) => {
     try {
-        console.log(req.cookies)
         const { token } = req.cookies;
         if (!token) {
-            throw new Error("Please login to access this route")
+            throw new Error("You are not login ")
         }
         const decoded = jwt.verify(token, "DevTinder@123");
 

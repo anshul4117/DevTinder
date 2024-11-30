@@ -1,8 +1,9 @@
 const express = require('express');
 const authRouter = express.Router();
-const validatSignUpData = require('../utils/user.js');
-const User = require('./models/user.js');
+const validatSignUpData = require('../utils/validation.js');
+const User = require('../models/user.js');
 const bcrypt = require('bcrypt');
+const { userAuth } = require('../middleware/auth.js');
 
 authRouter.post('/signUp', async (req, res) => {
     try {
@@ -61,4 +62,21 @@ authRouter.post('/login', async (req, res) => {
         })
     }
 })
+
+authRouter.post('/logout', userAuth, async (req, res) => {
+    try {
+        res.cookie("token", null, {
+            expires: new Date(Date.now()),
+        }).json({
+            message: "Logged out successfully",
+        })
+
+
+    } catch (error) {
+        res.status(400).json({
+            message: "Error : " + error.message
+        })
+    }
+})
+
 module.exports = authRouter;

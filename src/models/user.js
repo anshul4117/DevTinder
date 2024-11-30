@@ -17,6 +17,10 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
     },
+    about: {
+        type: String,
+        default: 'No description'
+    },
     age: {
         type: Number
     },
@@ -28,6 +32,9 @@ const userSchema = mongoose.Schema({
                 throw new Error("Gender is not valid");
             }
         }
+    },
+    skills: {
+        type: [String]
     }
 }, {
     timestamps: true
