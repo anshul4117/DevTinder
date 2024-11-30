@@ -2,11 +2,14 @@ const express = require('express');
 const connectDB = require('./config/db.js');
 const User = require('./models/user.js');
 const validatSignUpData = require('../utils/user.js');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser')
 const app = express();
-const bcrypt = require('bcrypt')
 
 // 
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser());
 
 
 app.post('/signUp', async (req, res) => {
@@ -47,14 +50,37 @@ app.post('/login', async (req, res) => {
         };
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
+        if (isMatch) {
+
+            const token = jwt.sign({ _id: user._id }, "DevTinder@123");
+            console.log("token : ", token)
+            res.cookie("token", token).json({
+                message: "Logged in successfully",
+            })
+        } else {
             throw new Error('Invalid Credentials');
         }
-        res.status(200).json({
-            message: "User logged in successfully",
-            user: user
+    } catch (error) {
+        res.status(400).json({
+            message: "Error : " + error.message
         })
+    }
+})
 
+app.get('/profile', async (req, res) => {
+    try {
+        const { token } = req.cookies;
+
+        const verifyToken = await jwt.verify(token, "DevTindr@123");
+        if (!verifyToken) {
+            throw new Error('Invalid Token');
+        } else {
+            const user = await User.findById(verifyToken._id).select("-password");
+            res.status(200).json({
+                message: "getting Details", 
+                user
+            })
+        }
     } catch (error) {
         res.status(400).json({
             message: "Error : " + error.message
