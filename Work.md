@@ -72,3 +72,13 @@
 - UserAuth middleware
 - Add the userAuth middleware in profile API and a new sendConnectionRequest API
 - Set the expiry of JWT token and cookies to 7days
+- Create userSchema method to getJWT
+- Create userSchema method to comparePassword(pass)
+
+- Create Router folder for managing auth, profile, request Router
+- Create authRouter, profileRouter, requestRouter
+- Import these routes in app.js
+- Create POST /logout
+- Create PATCH /profile/edit
+- Create PATCH /profile/password  -> forget password API
+- Make you validate all the data in every POST, PATCH, APIs
