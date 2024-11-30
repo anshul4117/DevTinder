@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db.js');
 const User = require('./models/user.js');
 const validatSignUpData = require('../utils/user.js');
+const { userAuth } = require('./middleware/auth.js')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
@@ -50,11 +51,15 @@ app.post('/login', async (req, res) => {
         };
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (isMatch) {
 
-            const token = jwt.sign({ _id: user._id }, "DevTinder@123");
+        if (isMatch) {
+            const token = await user.getJWT();
             console.log("token : ", token)
-            res.cookie("token", token).json({
+
+            res.cookie("token", token, {
+                httpOnly: true,
+                expires: new Date(Date.now() + 3600000),
+            }).json({
                 message: "Logged in successfully",
             })
         } else {
@@ -67,20 +72,13 @@ app.post('/login', async (req, res) => {
     }
 })
 
-app.get('/profile', async (req, res) => {
+app.get('/profile', userAuth, async (req, res) => {
     try {
-        const { token } = req.cookies;
-
-        const verifyToken = await jwt.verify(token, "DevTindr@123");
-        if (!verifyToken) {
-            throw new Error('Invalid Token');
-        } else {
-            const user = await User.findById(verifyToken._id).select("-password");
-            res.status(200).json({
-                message: "getting Details", 
-                user
-            })
-        }
+        const user = req.user;
+        res.status(200).json({
+            message: "getting Details",
+            user
+        })
     } catch (error) {
         res.status(400).json({
             message: "Error : " + error.message
