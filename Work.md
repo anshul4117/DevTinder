@@ -35,3 +35,33 @@
 - Connect your application to the Database "Connection-url"/devTinder
 - Call the connection function and connect to the DB before starting applicaion on PORT
 - 
+- Create a mongoose Schema
+- Create POST /signUp API to add data in DB
+- Push some documents using API calls from Postman
+- Error Handling using try, catch
+
+- JS object vs JSON object
+- Add express.json() middleware in app.js
+- Make you signup API dynamic to recive data from the end user
+- API - get user by email
+- API - Feed API  = get /feed - get all the users from the database
+- API - get user by id
+- API - update user by emailId
+- API - delete user by id   
+
+- Explore schematype options from the documentation
+- add required , unique ,lowercase , or more
+- Add default
+- Create custom validator function for gender
+- Improve the DB Schema - PUT all appropiate validations on each fields in Schema
+- Add API level validations on patch request & signup post api
+- Data Sanitizing - Add API validation for each field
+- Install validator 
+- Explore validator library function and use validator function
+- Never trust on req.body
+
+- Validate data in signup API
+- Install bcrypt package
+- Create PasswordHash using bcrypt.hash & save the user is encrypted password
+- Create login API 
+- Compare password and throw error if email or password is invalid

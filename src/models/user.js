@@ -2,22 +2,31 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
     firstName: {
-        type: String
+        type: String,
+        required: true
     },
     lastName: {
         type: String,
     },
     email: {
         type: String,
+        required: true,
+        unique: true
     },
     password: {
-        type: String
+        type: String,
     },
     age: {
         type: Number
     },
     gender: {
-        type: String
+        type: String,
+        default: "male",
+        validate(value) {
+            if (!["male", "female", "others"].includes(value)) {
+                throw new Error("Gender is not valid");
+            }
+        }
     }
 });
 
