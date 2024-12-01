@@ -82,3 +82,12 @@
 - Create PATCH /profile/edit
 - Create PATCH /profile/password  -> forget password API
 - Make you validate all the data in every POST, PATCH, APIs
+
+- Create the Connection Request Schema
+- Send connection request API
+- Proper validation of Data
+- Think about all corner cases
+- $or query $and query in mongoose
+- Read more about indexs in mongoDB
+- why we need index in DB
+- What is the advantage and dis-advantage of creating index  
