@@ -1,2 +1,2 @@
 node_modules
-/src/config/db.js
+./config/db.js
